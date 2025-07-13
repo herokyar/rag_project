@@ -5,6 +5,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # Load the API key from env variables
 load_dotenv()
@@ -28,7 +29,8 @@ def format_docs(docs):
 
 
 def create_rag_chain(chunks):
-    embeddings = OpenAIEmbeddings(api_key=api_key)
+    # embeddings = OpenAIEmbeddings(api_key=api_key)  #Use HuggingFaceEmbeddings instead
+    embeddings = HuggingFaceEmbeddings()
     doc_search = FAISS.from_documents(chunks, embeddings)
     retriever = doc_search.as_retriever(
         search_type="similarity", search_kwargs={"k": 5}
