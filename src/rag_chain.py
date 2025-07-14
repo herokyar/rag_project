@@ -33,7 +33,7 @@ def create_rag_chain(chunks):
     embeddings = HuggingFaceEmbeddings()
     doc_search = FAISS.from_documents(chunks, embeddings)
     retriever = doc_search.as_retriever(
-        search_type="similarity", search_kwargs={"k": 5}
+        search_type="similarity", search_kwargs={"k": 2}  #Find only the 2 most relevant chunks.
     )
     # llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)  # Use a free model
     llm = HuggingFacePipeline.from_model_id(
