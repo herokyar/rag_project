@@ -37,7 +37,7 @@ def create_rag_chain(chunks):
     )
     # llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)  # Use a free model
     llm = HuggingFacePipeline.from_model_id(
-        model_id='microsoft/DialoGPT-medium',
+        model_id='distilgpt2',
         task='text-generation'
     )
 
